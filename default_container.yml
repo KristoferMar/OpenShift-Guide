@@ -1,0 +1,23 @@
+kind: LimitRange
+apiVersion: v1
+metadata:
+  name: test-core-resource-limits
+  namespace: test
+spec:
+  limits:
+    - type: Container
+      max:
+        memory: 6Gi
+      min:
+        memory: 10Mi
+      default:
+        cpu: 500m
+        memory: 1536Mi
+      defaultRequest:
+        cpu: 50m
+        memory: 256Mi
+    - type: Pod
+      max:
+        memory: 12Gi
+      min:
+        memory: 6Mi
