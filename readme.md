@@ -9,6 +9,7 @@ In the folder in this repo you can find usefull commands to remember
 <h2>Operators</h2>
 An Operator is essentially a custom controller.
 
+- But not all controllers are operators.
 
 - It's a pattern used to automate tasks in a cluster. <br>
 - It's a way to package, deploy and manage a Kubernetes native application <br>
