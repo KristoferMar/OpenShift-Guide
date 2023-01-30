@@ -1,20 +1,34 @@
-# Deploying and Managing Applications on an OpenShift Cluster
+# Red Hat OpenShift Administration II: Operating a Production Kubernetes Cluster
 
-# Deploying and Managing Applications on an OpenShift Cluster
+## Describing the Red Hat OpenShift Container Platform
+## Verifying the Health of a Cluster
+## Configuring Authentication and Authorization
+## Configuring Application Security
+## Configuring OpenShift Networking for Applications
+## Controlling Pod Scheduling
+## Describing Cluster Updates
+## Managing a Cluster with the Web Console
 
-# Designing Containerzied Applications for OpensShift
 
-# Publishing Enterprise Container Images
 
-# Managing Builds on OpenShift
+# RedHat OpenShift Developer 2: Building Kubernetes Applications 
+## Deploying and Managing Applications on an OpenShift Cluster
 
-# Customizing Source-to-Image Builds
+## Deploying and Managing Applications on an OpenShift Cluster
 
-# Deploying Multi-container Applications
+## Designing Containerzied Applications for OpensShift
 
-# Managing Application Deployments
+## Publishing Enterprise Container Images
 
-# Building Apllications for OpenShift
+## Managing Builds on OpenShift
+
+## Customizing Source-to-Image Builds
+
+## Deploying Multi-container Applications
+
+## Managing Application Deployments
+
+## Building Apllications for OpenShift
 
 
 <h1>OpenShift</h1>
