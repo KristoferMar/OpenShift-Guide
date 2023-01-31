@@ -1,3 +1,5 @@
+## Create, manage and configure dynamic storage
+
 Verify the default storage class
 <pre>
 [kris@workstation ~]$ oc get storageclass

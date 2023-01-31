@@ -1,3 +1,5 @@
+# Description of the Red Hat OpenShift Container Platform
+
 - Red Hat OpenShift Container Platform executes the Kubernetes pods in the CRI-O container engine.
 
 - RHOCP 4 provides services on top of Kubernetes, such as an internal container image registry, storage, and networking providers.
