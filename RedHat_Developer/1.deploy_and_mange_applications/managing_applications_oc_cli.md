@@ -40,7 +40,7 @@ Example of a build template
 Get avaiable tempaltes
 
 ```
-[student@workstation DO288-apps]$ oc get templates -n openshift | grep php \
+[kris@workstation DO288-apps]$ oc get templates -n openshift | grep php \
 | grep mysql
 cakephp-mysql-example       An example CakePHP application ...
 cakephp-mysql-persistent    An example CakePHP application ...
@@ -49,7 +49,7 @@ cakephp-mysql-persistent    An example CakePHP application ...
 Create template from json file located on local workstation.
 
 ```
-[student@workstation DO288-apps]$ oc create -f \
+[kris@workstation DO288-apps]$ oc create -f \
 ~/DO288/labs/build-template/php-mysql-ephemeral.json
 template.template.openshift.io/php-mysql-ephemeral created
 ```
@@ -57,7 +57,7 @@ template.template.openshift.io/php-mysql-ephemeral created
 Review the template parameters 
 
 ```
-[student@workstation DO288-apps]$ oc describe template php-mysql-ephemeral \
+[kris@workstation DO288-apps]$ oc describe template php-mysql-ephemeral \
 -n ${RHT_OCP4_DEV_USER}-common
 Name:		php-mysql-ephemeral
 ...output omitted...
@@ -73,7 +73,7 @@ Parameters:
 After creating an app using the template you can check the logs
 
 ```
-[student@workstation DO288-apps]$ oc logs -f bc/quotesapi
+[kris@workstation DO288-apps]$ oc logs -f bc/quotesapi
 Cloning "https://github.com/your-GitHub-user/DO288-apps" ...
 ...output omitted...
 Push successful
@@ -82,9 +82,9 @@ Push successful
 Get the ip andress and endpoint of pod
 
 ```
-[student@workstation DO288-apps]$ oc describe svc quotesdb | grep Endpoints
+[kris@workstation DO288-apps]$ oc describe svc quotesdb | grep Endpoints
 Endpoints:		10.8.0.71:3306
-[student@workstation ~]$ oc describe pod quotesdb-6b7ffcc649-dslpq | grep IP
+[kris@workstation ~]$ oc describe pod quotesdb-6b7ffcc649-dslpq | grep IP
 IP:			10.8.0.71
 ...output omitted...
 ```
@@ -92,7 +92,7 @@ IP:			10.8.0.71
 Verify the database connection parameters in application pod
 
 ```
-[student@workstation DO288-apps]$ oc describe pod quotesapi-7d76ff58f8-6j2gx \
+[kris@workstation DO288-apps]$ oc describe pod quotesapi-7d76ff58f8-6j2gx \
 | grep -A 5 Environment
     Environment:
       DATABASE_SERVICE_NAME:    quotesdb
@@ -105,7 +105,7 @@ Verify the database connection parameters in application pod
 Verify that application pod can reach the database pod
 
 ```
-[student@workstation DO288-apps]$ oc rsh quotesapi-7d76ff58f8-6j2gx bash -c \
+[kris@workstation DO288-apps]$ oc rsh quotesapi-7d76ff58f8-6j2gx bash -c \
 'echo > /dev/tcp/$DATABASE_SERVICE_NAME/3306 && echo OK || echo FAIL'
 OK
 ```
@@ -113,7 +113,7 @@ OK
 Review application logs
 
 ```
-[student@workstation DO288-apps]$ oc logs quotesapi-7d76ff58f8-6j2gx
+[kris@workstation DO288-apps]$ oc logs quotesapi-7d76ff58f8-6j2gx
 AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.129.0.143. Set the 'ServerName' directive globally to suppress this message
 ...output omitted...
 [Mon May 27 14:54:56.187516 2019] [php7:notice] [pid 52] [client 10.128.2.3:43952] SQL error: Table 'phpapp.quote' doesn't exist\n
@@ -124,24 +124,24 @@ AH00558: httpd: Could not reliably determine the server's fully qualified domain
 Copy SQL script to database pod
 
 ```
-[student@workstation DO288-apps]$ oc cp ~/DO288/labs/build-template/quote.sql \
+[kris@workstation DO288-apps]$ oc cp ~/DO288/labs/build-template/quote.sql \
 quotesdb-6b7ffcc649-dslpq:/tmp/quote.sql
 ```
 
 Run SQL script inside the database pod
 
 ```
-[student@workstation DO288-apps]$ oc rsh -t quotesdb-6b7ffcc649-dslpq
+[kris@workstation DO288-apps]$ oc rsh -t quotesdb-6b7ffcc649-dslpq
 sh-4.2$ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < /tmp/quote.sql
 ...output omitted...
 sh-4.2$ exit
-[student@workstation DO288-apps]$
+[kris@workstation DO288-apps]$
 ```
 
 You can now access application to verify that it works
 
 ```
-[student@workstation DO288-apps]$ curl -si \
+[kris@workstation DO288-apps]$ curl -si \
 http://quote-$RHT_OCP4_DEV_USER.$RHT_OCP4_WILDCARD_DOMAIN/get.php
 HTTP/1.1 200 OK
 ...output omitted...
