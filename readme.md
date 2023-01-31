@@ -1,13 +1,21 @@
 # Red Hat OpenShift Administration II: Operating a Production Kubernetes Cluster
 
 ## Describing the Red Hat OpenShift Container Platform
+https://github.com/KristoferMar/OpenShift-Guide/tree/master/RedHat_Administrator/1-describing_openshift
+
 ## Verifying the Health of a Cluster
+https://github.com/KristoferMar/OpenShift-Guide/tree/master/RedHat_Administrator/2-verify_health
+
 ## Configuring Authentication and Authorization
+https://github.com/KristoferMar/OpenShift-Guide/tree/master/RedHat_Administrator/3-authentication_and_authorizaton
+
 ## Configuring Application Security
-## Configuring OpenShift Networking for Applications
-## Controlling Pod Scheduling
-## Describing Cluster Updates
-## Managing a Cluster with the Web Console
+https://github.com/KristoferMar/OpenShift-Guide/tree/master/RedHat_Administrator/4-configuring_application_security
+
+## Configuring OpenShift Networking for Applications (WIP)
+## Controlling Pod Scheduling (WIP)
+## Describing Cluster Updates (WIP)
+## Managing a Cluster with the Web Console (WIP)
 
 
 
