@@ -1,11 +1,11 @@
 Firstly login and create a project
 
 <pre>
-[student@workstation ~]$ oc login -u developer -p developer \
+[kris@workstation ~]$ oc login -u developer -p developer \
 >    https://api.ocp4.example.com:6443
 Login successful.
 
-[student@workstation ~]$ oc new-project authorization-secrets
+[kris@workstation ~]$ oc new-project authorization-secrets
 Now using project "authorization-secrets" on server
 "https://api.ocp4.example.com:6443".
 ...output omitted...
@@ -13,7 +13,7 @@ Now using project "authorization-secrets" on server
 
 Create a secret with the credentials and connection information to access a MySQL database 
 <pre>
-[student@workstation ~]$ oc create secret generic mysql \
+[kris@workstation ~]$ oc create secret generic mysql \
 >   --from-literal user=myuser --from-literal password=redhat123
 >   --from-literal database=test_secrets --from-literal hostname=mysql
 secret/mysql created
@@ -23,7 +23,7 @@ We then try to deploy a database and add the secret for user and database config
 
 This will fail because we need to add the default database initial configurations.
 <pre>
-[student@workstation ~]$ oc new-app --name mysql \
+[kris@workstation ~]$ oc new-app --name mysql \
 >   --image registry.redhat.io/rhel8/mysql-80:1
 ...output omitted...
 --> Creating resources ...
@@ -36,7 +36,7 @@ This will fail because we need to add the default database initial configuration
 
 Run the oc get pods command with the -w option to retrieve the status of the deployment in real time. Here we notice how the database pod is in failed state due to missing configuration.
 <pre>
-[student@workstation ~]$ oc get pods -w
+[kris@workstation ~]$ oc get pods -w
 NAME                     READY   STATUS             RESTARTS      AGE
 mysql-7b58b9b68b-ftp6j   0/1     CrashLoopBackOff   3 (46s ago)   106s
 mysql-7b58b9b68b-ftp6j   1/1     Running            4 (53s ago)   113s
@@ -46,13 +46,13 @@ mysql-7b58b9b68b-ftp6j   0/1     CrashLoopBackOff   4 (16s ago)   2m9s
 
 Use the mysql secret to initialize environment variables on the mysql deployment. The deployment needs the MYSQL_USER, MYSQL_PASSWORD and MYSQL_DATABASE environment variables for a succesful initialization. 
 <pre>
-[student@workstation ~]$ oc set env deployment/mysql --from secret/mysql --prefix MYSQL_
+[kris@workstation ~]$ oc set env deployment/mysql --from secret/mysql --prefix MYSQL_
 deployment.apps/mysql updated
 </pre>
 
 To demonstrate how a secret can be mounted as a volume, mount the mysql secret to the /run/secrets/mysql directory within the pod. This step only shows how to mount a secret as a volume, it is not required to fix the deployment.
 <pre>
-[student@workstation ~]$ oc set volume deployment/mysql --add --type secret \
+[kris@workstation ~]$ oc set volume deployment/mysql --add --type secret \
 >   --mount-path /run/secrets/mysql --secret-name mysql
 info: Generated volume name: volume-nrh7r
 deployment.apps/mysql volume updated
@@ -63,7 +63,7 @@ deployment.apps/mysql volume updated
 
 Now we create a new application using one of redhats projects.
 <pre>
-[student@workstation ~]$ oc new-app --name quotes \
+[kris@workstation ~]$ oc new-app --name quotes \
 >   --image quay.io/redhattraining/famous-quotes:2.1
 --> Found container image 7ff1a7b (19 months old) from quay.io for "quay.io/redhattraining/famous-quotes:2.1"
 ...output omitted...
@@ -77,7 +77,7 @@ Now we create a new application using one of redhats projects.
 
 Verify the status of the quotes application pod. The pod displays an error because it cannot connect to the database. This might take a while to display in the output. Press Ctrl=C to exit the command.
 <pre>
-[student@workstation ~]$ oc get pods -l deployment=quotes -w
+[kris@workstation ~]$ oc get pods -l deployment=quotes -w
 NAME                      READY   STATUS             RESTARTS      AGE
 quotes-66b987df5d-59flf   0/1     CrashLoopBackOff   2 (20s ago)   50s
 quotes-66b987df5d-59flf   0/1     Error              3             59s
@@ -88,47 +88,47 @@ The quotes application requires several environment variables. The mysql secret 
 
 Use the mysql secret to initialize the follwoing environment variables that the quotes application needs to connect to the database and hostname keys of the mysql secret.
 <pre>
-[student@workstation ~]$ oc set env deployment/quotes --from secret/mysql \
+[kris@workstation ~]$ oc set env deployment/quotes --from secret/mysql \
 >   --prefix QUOTES_
 deployment.apps/quotes updated
 </pre>
 
 Wait until the quotes application pod redeploys. The older pods terminate automatically.
 <pre>
-[student@workstation ~]$ oc get pods -l deployment=quotes
+[kris@workstation ~]$ oc get pods -l deployment=quotes
 NAME                      READY   STATUS    RESTARTS   AGE
 quotes-77df54758b-mqdtf   1/1     Running   3          7m17s
 </pre>
 
 Check the logs to verify succesfull database connection
 <pre>
-[student@workstation ~]$ oc logs quotes-77df54758b-mqdtf | head -n2
+[kris@workstation ~]$ oc logs quotes-77df54758b-mqdtf | head -n2
 ... Connecting to the database: myuser:redhat123@tcp(mysql:3306)/test_secrets
 ... Database connection OK
 </pre>
 
 Expose the quotes service so that it can be accessed from outside the cluster
 <pre>
-[student@workstation ~]$ oc expose service quotes \
+[kris@workstation ~]$ oc expose service quotes \
 >    --hostname quotes.apps.ocp4.example.com
 route.route.openshift.io/quotes exposed
 </pre>
 
 Verify the application host name.
 <pre>
-[student@workstation ~]$ oc get route quotes
+[kris@workstation ~]$ oc get route quotes
 NAME     HOST/PORT                      PATH   SERVICES   PORT       ...
 quotes   quotes.apps.ocp4.example.com          quotes     8000-tcp   ...
 </pre>
 
 Test the application with curl
 <pre>
-[student@workstation ~]$ curl -s http://quotes.apps.ocp4.example.com/status
+[kris@workstation ~]$ curl -s http://quotes.apps.ocp4.example.com/status
 Database connection OK
 </pre>
 
 Delete the project 
 <pre>
-[student@workstation ~]$ oc delete project authorization-secrets
+[kris@workstation ~]$ oc delete project authorization-secrets
 project.project.openshift.io "authorization-secrets" deleted
 </pre>
