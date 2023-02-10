@@ -2,14 +2,14 @@
 
 Create a new Helm Chart.
 <pre>
-[student@workstation multicontainer-helm]$ helm create famouschart
+[kris@workstation multicontainer-helm]$ helm create famouschart
 Creating famouschart
-[student@workstation multicontainer-helm]$ cd famouschart
+[kris@workstation multicontainer-helm]$ cd famouschart
 </pre>
 
 The folder structure will look like the following 
 <pre>
-[student@workstation famouschart]$ tree .
+[kris@workstation famouschart]$ tree .
 .
 ├── charts
 ├── Chart.yaml
@@ -58,7 +58,7 @@ dependencies:
 Update the dependencies for the chart.
 This downloads the charts added as dependencies and locks its versions.
 <pre>
-[student@workstation famouschart]$ helm dependency update
+[kris@workstation famouschart]$ helm dependency update
 Getting updates for unmanaged Helm repositories...
 ...Successfully got an update from the "https://charts.bitnami.com/bitnami" chart repository
 Saving 1 charts
@@ -112,15 +112,15 @@ env:
 ## Deploy the application using the Helm chart.
 
 <pre>
-[student@workstation famouschart]$ oc login -u ${RHT_OCP4_DEV_USER} \
+[kris@workstation famouschart]$ oc login -u ${RHT_OCP4_DEV_USER} \
 -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
-[student@workstation famouschart]$ oc new-project \
+[kris@workstation famouschart]$ oc new-project \
 ${RHT_OCP4_DEV_USER}-multicontainer-helm
 </pre>
 
 Use the helm install command to deploy the application in the RHOCP cluster
 <pre>
-[student@workstation famouschart]$ helm install famousapp .
+[kris@workstation famouschart]$ helm install famousapp .
 NAME: famousapp
 LAST DEPLOYED: Thu May 20 19:12:09 2021
 NAMESPACE: yourdevuser-multicontainer-helm
@@ -132,7 +132,7 @@ NOTES:
 
 Verify
 <pre>
-[student@workstation famouschart]$ oc get deployments
+[kris@workstation famouschart]$ oc get deployments
 NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
 famousapp-famouschart      0/1     1            1           10s
 </pre>
