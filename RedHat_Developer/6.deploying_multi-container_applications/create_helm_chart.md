@@ -2,6 +2,10 @@
 
 Helm is an open source package manager for Kubernetes applications. It provides a way to package, share, and manage the life cycle of said Kubernetes applications.
 
+The YAML files are 
+- Chart.yaml: Holds the Chart definition information
+- values.yaml: Holds the values that Helm uses in the default and user-created templates.
+
 A Helm Chart is a collection of files and templates that define a Helm application. These files are later packaged for distribution using Helm repositories.
 
 Make sure helm is installed
