@@ -11,5 +11,6 @@
 - templates## Managing Application Deployments 
 
 ## Managing Applications Deployments
+- Deployment Strategies
 
 ## Building Applications for OpenShift
