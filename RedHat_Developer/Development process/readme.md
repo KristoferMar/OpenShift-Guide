@@ -10,7 +10,7 @@ podman build -t localhost/imagename .
 </pre>
 
 <pre>
-podman run -d -name imagename localhost/imagename
+podman run -d --name imagename localhost/imagename
 </pre>
 
 Run with exposed port
