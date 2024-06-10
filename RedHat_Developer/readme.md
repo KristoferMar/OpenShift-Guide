@@ -1,7 +1,7 @@
 ## Deploying and Managing Applications on an OpenShift Cluster
 #### Create new project
 ```
-oc new-project projectname
+oc new-project my-app --display-name="My Application"
 ```
 ## Deploying Containerized Applications for OpenShift
 ## Enterprise container images
