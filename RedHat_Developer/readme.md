@@ -3,6 +3,11 @@
 ```
 oc new-project my-app --display-name="My Application"
 ```
+View project
+```
+oc get project sftp
+```
+
 ## Deploying Containerized Applications for OpenShift
 ## Enterprise container images
 - ImageStreams
