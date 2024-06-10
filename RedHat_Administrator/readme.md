@@ -37,6 +37,8 @@ oc apply -f custom-privileged-scc.yaml
 Assign the SCC to Service Account
 ```
 oc get sa -n <your-namespace>
+
 and then
+
 oc adm policy add-scc-to-user custom-privileged-scc -z default -n <your-namespace>
 ```
