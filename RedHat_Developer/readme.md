@@ -32,6 +32,11 @@ docker push the-openshift-image-registry/my-project/my-app:latest
 oc new-app my-project/my-app:latest
 ```
 
+### Logs
+Get all logs needed
+```
+oc get all
+```
 
 ## Deploying Containerized Applications for OpenShift
 ## Enterprise container images
