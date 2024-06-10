@@ -5,7 +5,7 @@ oc new-project my-app --display-name="My Application"
 ```
 View project
 ```
-oc get project sftp
+oc get project my-app
 ```
 
 ## Deploying Containerized Applications for OpenShift
